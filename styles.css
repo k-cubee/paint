@@ -1,0 +1,27 @@
+#graph {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 100vh;
+    border: solid 3px black;
+}
+
+.circle {
+    fill: green;
+}
+
+.rect {
+    fill: brown;
+}
+
+.rect:hover {
+    fill: blue;
+    transition: fill 1s;
+}
+
+.circle:hover {
+    fill: red;
+    transition: fill 1s;
+}
