@@ -74,10 +74,42 @@ svg.on("mouseup", () => {
     drawbet.pop();
 });
 
+svg.on("touchstart", () => {
+    drawing = true;
+});
+
+svg.on("touchend", () => {
+    drawing = false;
+    drawbet.pop();
+});
+
 let drawbet = [];
 let color = "red";
 
 svg.on("mousemove", (e) => {
+    if (drawing === false) {
+        return;
+    }
+    const coords = d3.pointer(e);
+    drawbet.push(coords);
+
+    if (drawbet.length != 1) {
+        svg.append("path")
+            .attr("d", d3.line()(drawbet))
+            .attr("stroke", color)
+            .attr("fill", "none")
+            .attr("stroke-width", 10);
+        drawbet.shift();
+    }
+
+    svg.append("circle")
+        .attr("cx", coords[0])
+        .attr("cy", coords[1])
+        .attr("r", 5)
+        .style("fill", color);
+});
+
+svg.on("touchmove", (e) => {
     if (drawing === false) {
         return;
     }
